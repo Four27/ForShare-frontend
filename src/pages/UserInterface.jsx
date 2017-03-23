@@ -57,7 +57,7 @@ class UserInterface extends React.Component {
               return (
                 <div className="publish" key={urlKey}>
                   <span>{publishContent}</span>
-                  <Button bsStyle="default"><Link to={`/link/${urlKey}`}>查看</Link></Button>
+                  <Button bsStyle="default"><Link to={`/link/${urlKey}`}>删除</Link></Button>
                 </div>
               );
             })
