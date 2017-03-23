@@ -1,7 +1,6 @@
 import React from 'react';
 import ajax from 'superagent';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router';
 
 import baseUrl from './config';
 import './UserInterface.css';
@@ -17,7 +16,7 @@ class UserInterface extends React.Component {
     };
   }
   componentWillMount() {
-    ajax.get(`${baseUrl}/users/${this.props.params.id}`)
+    ajax.get(`${baseUrl}/users/${this.props.params.id}/`)
     .end((error, response) => {
       if (!error && response) {
         this.setState({ userInformation: response.body });
@@ -28,16 +27,15 @@ class UserInterface extends React.Component {
     });
   }
 
-  sourceDelete = () => {
-    ajax.delete(`${baseUrl}/users/${this.props.params.id}`)
-       .end((error, response) => {
-         if (!error && response) {
-           this.setState({ userInformation: response.body });
-           console.log("success");
-         } else {
-           console.log("fail");
-         }
-       });
+  handleSourceDelete = (id) => {
+    ajax.del(`${baseUrl}/urlpublish/${id}/`)
+    .end((error, response) => {
+      if (!error && response) {
+        console.log("success");
+      } else {
+        console.log("fail");
+      }
+    });
   }
 
   render() {
@@ -57,7 +55,7 @@ class UserInterface extends React.Component {
               return (
                 <div className="publish" key={urlKey}>
                   <span>{publishContent}</span>
-                  <Button bsStyle="default"><Link to={`/link/${urlKey}`}>删除</Link></Button>
+                  <Button bsStyle="default" onClick={this.handleSourceDelete(urlKey)}>删除</Button>
                 </div>
               );
             })
