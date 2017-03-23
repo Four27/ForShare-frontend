@@ -55,7 +55,7 @@ class UserInterface extends React.Component {
               return (
                 <div className="publish" key={urlKey}>
                   <span>{publishContent}</span>
-                  <Button bsStyle="default" onClick={this.handleSourceDelete(urlKey)}>删除</Button>
+                  <Button bsStyle="default" onClick={() => this.handleSourceDelete(urlKey)}>删除</Button>
                 </div>
               );
             })
